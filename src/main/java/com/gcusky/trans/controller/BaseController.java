@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class BaseController {
 
+    static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
+
 
     // 定义 exceptionHandler 解决未被 controller 层吸收的 exception
     @ExceptionHandler(Exception.class)
@@ -21,7 +23,7 @@ public class BaseController {
     @ResponseBody
     public Object handlerException(HttpServletRequest request, Exception ex) {
         Map<String, Object> responseData = new HashMap<>();
-        if(ex instanceof BusinessException) {
+        if (ex instanceof BusinessException) {
             BusinessException businessException = (BusinessException) ex;
             responseData.put("errCode", businessException.getErrorCode());
             responseData.put("errMsg", businessException.getErrMsg());
@@ -29,6 +31,6 @@ public class BaseController {
             responseData.put("errCode", EmBusinessError.UNKNOWN_ERROR.getErrorCode());
             responseData.put("errMsg", EmBusinessError.UNKNOWN_ERROR.getErrMsg());
         }
-        return CommonReturnType.create(responseData,"fail");
+        return CommonReturnType.create(responseData, "fail");
     }
 }

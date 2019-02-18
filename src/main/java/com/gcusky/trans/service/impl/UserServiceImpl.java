@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public UserModel getUserById(Integer id) {
         // 调用 userDOMapper 获取到对应的用户 dataObject
         UserDO userDO = userDOMapper.selectByPrimaryKey(id);
-        if(userDO == null) return null;
+        if (userDO == null) return null;
         // 通过用户 ID 获取对应的用户加密密码信息
         UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
 
